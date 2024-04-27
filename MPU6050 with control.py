@@ -1,4 +1,4 @@
-#Include the library files
+#khai báo thư viện
 import RPi.GPIO as GPIO
 import smbus 
 from time import sleep
