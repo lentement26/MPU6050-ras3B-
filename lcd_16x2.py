@@ -22,7 +22,7 @@ E_PULSE = 0.0005
 E_DELAY = 0.0005
 
 #Open I2C interface
-bus = smbus.SMBus(1)
+busLCD = smbus.SMBus(1)
 
 def lcd_init():
   # Initialise display
@@ -44,19 +44,19 @@ def lcd_byte(bits, mode):
   bits_low = mode | ((bits<<4) & 0xF0) | LCD_BACKLIGHT
 
   # High bits
-  bus.write_byte(I2C_ADDR, bits_high)
+  busLCD.write_byte(I2C_ADDR, bits_high)
   lcd_toggle_enable(bits_high)
 
   # Low bits
-  bus.write_byte(I2C_ADDR, bits_low)
+  busLCD.write_byte(I2C_ADDR, bits_low)
   lcd_toggle_enable(bits_low)
 
 def lcd_toggle_enable(bits):
   # Toggle enable
   time.sleep(E_DELAY)
-  bus.write_byte(I2C_ADDR, (bits | ENABLE))
+  busLCD.write_byte(I2C_ADDR, (bits | ENABLE))
   time.sleep(E_PULSE)
-  bus.write_byte(I2C_ADDR,(bits & ~ENABLE))
+  busLCD.write_byte(I2C_ADDR,(bits & ~ENABLE))
   time.sleep(E_DELAY)
 
 def lcd_string(message,line):
