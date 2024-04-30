@@ -1,99 +1,96 @@
-#khai báo thư viện
+# Khai báo thư viện
 import RPi.GPIO as GPIO
-import smbus 
+import smbus
 from time import sleep
 
-# Setup GPIO pins
+# Thiết lập các chân GPIO
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-# Set the servo motor pin as output pin
-GPIO.setup(4,GPIO.OUT)
+# Đặt chân của động cơ servo là chân đầu ra
+GPIO.setup(4, GPIO.OUT)
 
-pwm = GPIO.PWM(4,50)
+pwm = GPIO.PWM(4, 50)
 pwm.start(0)
 
-#some MPU6050 Registers and their Address
-PWR_MGMT_1   = 0x6B
-SMPLRT_DIV   = 0x19
-CONFIG       = 0x1A
-GYRO_CONFIG  = 0x1B
-INT_ENABLE   = 0x38
+# Một số thanh ghi MPU6050 và địa chỉ của chúng
+PWR_MGMT_1 = 0x6B
+SMPLRT_DIV = 0x19
+CONFIG = 0x1A
+GYRO_CONFIG = 0x1B
+INT_ENABLE = 0x38
 ACCEL_XOUT = 0x3B
 ACCEL_YOUT = 0x3D
 ACCEL_ZOUT = 0x3F
-GYRO_XOUT  = 0x43
-GYRO_YOUT  = 0x45
-GYRO_ZOUT  = 0x47
+GYRO_XOUT = 0x43
+GYRO_YOUT = 0x45
+GYRO_ZOUT = 0x47
 
+bus = smbus.SMBus(4)
+Device_Address = 0x68  # Địa chỉ thiết bị MPU6050
 
-bus = smbus.SMBus(4) 
-#busLCD = smbus.SMBus(4)
-Device_Address = 0x68 # MPU6050 device address
-
-def angle(Angle):
-    duty = Angle / 18 + 2
-    GPIO.output(4,True)
+def angle(Góc):
+    duty = Góc / 18 + 2
+    GPIO.output(4, True)
     pwm.ChangeDutyCycle(duty)
-#     sleep(1)
-    GPIO.output(4,False)
-#     pwm.ChangeDutyCycle(0)
-    
+    #     sleep(1)
+    GPIO.output(4, False)
+    #     pwm.ChangeDutyCycle(0)
+
 def setAngle():
     angle(90)
 
 def MPU_Init():
     
-    #write to sample rate register
+    # Ghi vào thanh ghi tỷ lệ mẫu
     bus.write_byte_data(Device_Address, SMPLRT_DIV, 7)
 
-    #Write to power management register
+    # Ghi vào thanh ghi quản lý nguồn
     bus.write_byte_data(Device_Address, PWR_MGMT_1, 1)
 
-    #Write to Configuration register
+    # Ghi vào thanh ghi cấu hình
     bus.write_byte_data(Device_Address, CONFIG, 0)
 
-    #Write to Gyro configuration register
+    # Ghi vào thanh ghi cấu hình girosco
     bus.write_byte_data(Device_Address, GYRO_CONFIG, 24)
 
-    #Write to interrupt enable register
+    # Ghi vào thanh ghi cho phép ngắt
     bus.write_byte_data(Device_Address, INT_ENABLE, 1)
 
 def read_raw_data(addr):
-    #Accelero and Gyro value are 16-bit
-        high = bus.read_byte_data(Device_Address, addr)
-        low = bus.read_byte_data(Device_Address, addr+1)
+    # Giá trị của Accelero và Gyro là 16 bit
+    high = bus.read_byte_data(Device_Address, addr)
+    low = bus.read_byte_data(Device_Address, addr + 1)
     
-        #concatenate higher and lower value
-        value = ((high << 8) | low)
+    # Ghép nối giá trị cao và giá trị thấp
+    value = ((high << 8) | low)
         
-        #to get signed value from mpu6050
-        if(value > 32768):
-                value = value - 65536
-        return value
-    
+    # Để lấy giá trị dấu từ mpu6050
+    if(value > 32768):
+        value = value - 65536
+    return value
 
 MPU_Init()
 
 while True:
-    #Read Accelerometer raw value
+    # Đọc giá trị thô của Accelerometer
     acc_x = read_raw_data(ACCEL_XOUT)
     acc_y = read_raw_data(ACCEL_YOUT)
     acc_z = read_raw_data(ACCEL_ZOUT)
 
-    #Read Gyroscope raw value
+    # Đọc giá trị thô của Gyroscope
     gyro_x = read_raw_data(GYRO_XOUT)
     gyro_y = read_raw_data(GYRO_YOUT)
     gyro_z = read_raw_data(GYRO_ZOUT)
 
-    Ax = acc_x/16384.0
-    Ay = acc_y/16384.0 
-    Az = acc_z/16384.0
+    Ax = acc_x / 16384.0
+    Ay = acc_y / 16384.0 
+    Az = acc_z / 16384.0
 
-    Gx = gyro_x/131.0
-    Gy = gyro_y/131.0
-    Gz = gyro_z/131.0
+    Gx = gyro_x / 131.0
+    Gy = gyro_y / 131.0
+    Gz = gyro_z / 131.0
 
-# Uncomment below line to see the Accelerometer and Gyroscope values   
+    # Bỏ chú thích dòng dưới đây để xem các giá trị của Accelerometer và Gyroscope
     print ("Gx=%.2f" %Gx, u'\u00b0'+ "/s", "\tGy=%.2f" %Gy, u'\u00b0'+ "/s", "\tGz=%.2f" %Gz, u'\u00b0'+ "/s", "\tAx=%.2f g" %Ax, "\tAy=%.2f g" %Ay, "\tAz=%.2f g" %Az) 	
        
     in_min = 1
@@ -101,14 +98,13 @@ while True:
     out_min = 0
     out_max = 180
     
-    setAngle() # Use this function to set the servo motor point
+    setAngle()  # Sử dụng hàm này để đặt điểm của động cơ servo
     
-    # Convert accelerometer Y axis values from 0 to 180   
+    # Chuyển đổi các giá trị trục Y của Accelerometer từ 0 đến 180   
     value = (Ay - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
     value = int(value)
     print(value)
     if value >= 0 and value <= 180:
-        # Write these values on the servo motor
-        angle(value) # Rotate the servo motor using the sensor values
+        # Ghi các giá trị này vào động cơ servo
+        angle(value)  # Xoay động cơ servo sử dụng các giá trị cảm biến
         sleep(0.08)
-        
