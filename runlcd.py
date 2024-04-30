@@ -1,7 +1,7 @@
-import lcd2  # Importing the LiquidCrystal_I2C module
+import LiquidCrystal_I2C  # Importing the LiquidCrystal_I2C module
 from time import sleep  # Importing the sleep function from the time module
 
-lcd = lcd2.lcd()  # Initializing the LCD object
+lcd = LiquidCrystal_I2C.lcd()  # Initializing the LCD object
 lcd.clear()  # Clearing the LCD screen
 lcd.display("Testing....", 1, 0)  # Displaying "Testing...." on the first line of the LCD
 sleep(1)  # Waiting for 1 second
