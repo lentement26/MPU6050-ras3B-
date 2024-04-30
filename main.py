@@ -89,8 +89,7 @@ while True:
     Gx = gyro_x / 131.0
     Gy = gyro_y / 131.0
     Gz = gyro_z / 131.0
-
-    # Bỏ chú thích dòng dưới đây để xem các giá trị của Accelerometer và Gyroscope
+    #các giá trị của Accelerometer và Gyroscope
     print ("Gx=%.2f" %Gx, u'\u00b0'+ "/s", "\tGy=%.2f" %Gy, u'\u00b0'+ "/s", "\tGz=%.2f" %Gz, u'\u00b0'+ "/s", "\tAx=%.2f g" %Ax, "\tAy=%.2f g" %Ay, "\tAz=%.2f g" %Az) 	
        
     in_min = 1
