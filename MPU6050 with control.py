@@ -26,7 +26,8 @@ GYRO_YOUT  = 0x45
 GYRO_ZOUT  = 0x47
 
 
-bus = smbus.SMBus(1) # or bus = smbus.SMBus(0) for older version boards
+bus = smbus.SMBus(1) 
+busLCD = smbus.SMBus(4)
 Device_Address = 0x68 # MPU6050 device address
 
 def angle(Angle):
