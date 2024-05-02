@@ -28,7 +28,7 @@ GYRO_ZOUT = 0x47
 
 bus = smbus.SMBus(4)
 Device_Address = 0x68  # Địa chỉ thiết bị MPU6050
-
+display.lcd_display_string("gia tri goc quay:",1)
 def angle(Góc):
     duty = Góc / 18 + 2
     GPIO.output(4, True)
@@ -112,4 +112,5 @@ while True:
         sleep(0.08)
     display.lcd_display_string(str(value), 2)
     sleep(0.081)
-    display.lcd_display_string("gia tri goc quay:",1)
+    
+   
