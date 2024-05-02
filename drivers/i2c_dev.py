@@ -7,7 +7,7 @@ from os.path import exists
 
 # old and new versions of the RPi have swapped the two i2c buses
 # they can be identified by RPI_REVISION (or check sysfs)
-BUS_NUMBER = 2
+BUS_NUMBER = 0 if RPI_REVISION == 1 else 1
 
 # other commands
 LCD_CLEARDISPLAY = 0x01
@@ -73,7 +73,7 @@ class I2CDevice:
     # write a single command
     def write_cmd(self, cmd):
         self.bus.write_byte(self.addr, cmd)
-        sleep(0.00011)
+        sleep(0.0001)
 
     # write a command and argument
     def write_cmd_arg(self, cmd, data):
