@@ -38,7 +38,7 @@ def angle(Góc):
     #     pwm.ChangeDutyCycle(0)
 
 def setAngle():
-    angle(90)
+    angle(0)
 
 def MPU_Init():
     
@@ -102,7 +102,7 @@ while True:
     #setAngle()  # Sử dụng hàm này để đặt điểm của động cơ servo
     
     # Chuyển đổi các giá trị trục Y của Accelerometer từ 0 đến 180   
-    value = (Ay - in_min) * (out_max - out_min) / (in_max - in_min) + out_min + 2
+    value = (Ay - in_min) * (out_max - out_min) / (in_max - in_min) + out_min 
     value = int(value)
     #print(value)
     display.lcd_clear()
@@ -110,5 +110,5 @@ while True:
         # Ghi các giá trị này vào động cơ servo
         angle(value)  # Xoay động cơ servo sử dụng các giá trị cảm biến
         sleep(0.08)
-    display.lcd_display_string(str(value), 2)
+    display.lcd_display_string(str(value+2), 2)
     sleep(0.081)
