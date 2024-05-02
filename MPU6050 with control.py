@@ -78,7 +78,7 @@ while True:
     acc_z = read_raw_data(ACCEL_ZOUT)
 
     # Đọc giá trị thô của Gyroscope
-    #gyro_x = read_raw_data(GYRO_XOUT)
+    gyro_x = read_raw_data(GYRO_XOUT)
     gyro_y = read_raw_data(GYRO_YOUT)
     gyro_z = read_raw_data(GYRO_ZOUT)
 
@@ -91,7 +91,7 @@ while True:
     Gz = gyro_z / 131.0
 
     # Bỏ chú thích dòng dưới đây để xem các giá trị của Accelerometer và Gyroscope
-    print ("Gx=%.2f" %Gx, u'\u00b0'+ "/s", "\tGy=%.2f" %Gy, u'\u00b0'+ "/s", "\tGz=%.2f" %Gz, u'\u00b0'+ "/s", "\tAx=%.2f g" %Ax, "\tAy=%.2f g" %Ay, "\tAz=%.2f g" %Az) 	
+    #print ("Gx=%.2f" %Gx, u'\u00b0'+ "/s", "\tGy=%.2f" %Gy, u'\u00b0'+ "/s", "\tGz=%.2f" %Gz, u'\u00b0'+ "/s", "\tAx=%.2f g" %Ax, "\tAy=%.2f g" %Ay, "\tAz=%.2f g" %Az) 	
        
     in_min = 1
     in_max = -1
