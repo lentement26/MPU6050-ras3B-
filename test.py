@@ -83,13 +83,13 @@ while True:
     gyro_y = read_raw_data(GYRO_YOUT)
     gyro_z = read_raw_data(GYRO_ZOUT)
 
-    Ax = acc_x / 16384.0
+    #Ax = acc_x / 16384.0
     Ay = acc_y / 16384.0 
-    Az = acc_z / 16384.0
+    #Az = acc_z / 16384.0
 
-    Gx = gyro_x / 131.0
-    Gy = gyro_y / 131.0
-    Gz = gyro_z / 131.0
+    #Gx = gyro_x / 131.0
+    #Gy = gyro_y / 131.0
+    #Gz = gyro_z / 131.0
 
     # Bỏ chú thích dòng dưới đây để xem các giá trị của Accelerometer và Gyroscope
     #print ("Gx=%.2f" %Gx, u'\u00b0'+ "/s", "\tGy=%.2f" %Gy, u'\u00b0'+ "/s", "\tGz=%.2f" %Gz, u'\u00b0'+ "/s", "\tAx=%.2f g" %Ax, "\tAy=%.2f g" %Ay, "\tAz=%.2f g" %Az) 	
@@ -105,8 +105,10 @@ while True:
     value = (Ay - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
     value = int(value)
     print(value)
-    display.lcd_display_string("hi", 1)
+    display.lcd_clear()
     if value >= 0 and value <= 180:
         # Ghi các giá trị này vào động cơ servo
         angle(value)  # Xoay động cơ servo sử dụng các giá trị cảm biến
         sleep(0.08)
+    display.lcd_display_string(value, 2)
+    sleep(0.08)
