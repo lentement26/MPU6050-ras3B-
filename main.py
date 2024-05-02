@@ -13,7 +13,7 @@ GPIO.setup(4, GPIO.OUT)
 pwm = GPIO.PWM(4, 50)
 pwm.start(0)
 
-# Một số thanh ghi MPU6050 và địa chỉ của chúng
+#  MPU6050 và địa chỉ 
 PWR_MGMT_1 = 0x6B
 SMPLRT_DIV = 0x19
 CONFIG = 0x1A
