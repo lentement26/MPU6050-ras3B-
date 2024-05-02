@@ -91,7 +91,7 @@ while True:
     #Gy = gyro_y / 131.0
     #Gz = gyro_z / 131.0
 
-    # Bỏ chú thích dòng dưới đây để xem các giá trị của Accelerometer và Gyroscope
+    # các giá trị của Accelerometer và Gyroscope
     #print ("Gx=%.2f" %Gx, u'\u00b0'+ "/s", "\tGy=%.2f" %Gy, u'\u00b0'+ "/s", "\tGz=%.2f" %Gz, u'\u00b0'+ "/s", "\tAx=%.2f g" %Ax, "\tAy=%.2f g" %Ay, "\tAz=%.2f g" %Az) 	
        
     in_min = 1
@@ -99,7 +99,7 @@ while True:
     out_min = 0
     out_max = 180
     
-    setAngle()  # Sử dụng hàm này để đặt điểm của động cơ servo
+    #setAngle()  # Sử dụng hàm này để đặt điểm của động cơ servo
     
     # Chuyển đổi các giá trị trục Y của Accelerometer từ 0 đến 180   
     value = (Ay - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
