@@ -79,9 +79,9 @@ while True:
     acc_z = read_raw_data(ACCEL_ZOUT)
 
     # Đọc giá trị thô của Gyroscope
-    gyro_x = read_raw_data(GYRO_XOUT)
-    gyro_y = read_raw_data(GYRO_YOUT)
-    gyro_z = read_raw_data(GYRO_ZOUT)
+    #gyro_x = read_raw_data(GYRO_XOUT)
+    #gyro_y = read_raw_data(GYRO_YOUT)
+    #gyro_z = read_raw_data(GYRO_ZOUT)
 
     #Ax = acc_x / 16384.0
     Ay = acc_y / 16384.0 
@@ -104,7 +104,7 @@ while True:
     # Chuyển đổi các giá trị trục Y của Accelerometer từ 0 đến 180   
     value = (Ay - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
     value = int(value)
-    print(value)
+    #print(value)
     display.lcd_clear()
     if value >= 0 and value <= 180:
         # Ghi các giá trị này vào động cơ servo
