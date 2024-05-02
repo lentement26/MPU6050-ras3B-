@@ -102,7 +102,7 @@ while True:
     #setAngle()  # Sử dụng hàm này để đặt điểm của động cơ servo
     
     # Chuyển đổi các giá trị trục Y của Accelerometer từ 0 đến 180   
-    value = (Ay - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
+    value = (Ay - in_min) * (out_max - out_min) / (in_max - in_min) + out_min + 12
     value = int(value)
     #print(value)
     display.lcd_clear()
