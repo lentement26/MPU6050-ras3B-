@@ -224,7 +224,7 @@ def get_key():
     if Button_1.value() == 0:                           #### Nut "."
         print("You have pressed:", matrix_keys1[0])
         led_onboard.value(1)
-        utime.sleep(0.3)
+        utime.sleep(0.31)
         led_onboard.value(0)
         matrix_char.append('.')
         chuoi_matrix=''.join(matrix_char)

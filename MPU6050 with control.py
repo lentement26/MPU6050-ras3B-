@@ -78,7 +78,7 @@ while True:
     acc_z = read_raw_data(ACCEL_ZOUT)
 
     # Đọc giá trị thô của Gyroscope
-    gyro_x = read_raw_data(GYRO_XOUT)
+    #gyro_x = read_raw_data(GYRO_XOUT)
     gyro_y = read_raw_data(GYRO_YOUT)
     gyro_z = read_raw_data(GYRO_ZOUT)
 
