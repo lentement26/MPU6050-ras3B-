@@ -114,7 +114,7 @@ while True:
     sleep(0.081)
     if value >= 91 and value <= 180:
         # Ghi các giá trị này vào động cơ servo
-        angle(-90+value)  # Xoay động cơ servo sử dụng các giá trị cảm biến
+        angle(value)  # Xoay động cơ servo sử dụng các giá trị cảm biến
         sleep(0.08)
     display.lcd_display_string(str(value), 2)
     sleep(0.081)
