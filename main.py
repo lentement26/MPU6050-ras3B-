@@ -110,5 +110,5 @@ while True:
         # Ghi các giá trị này vào động cơ servo
         angle(value)  # Xoay động cơ servo sử dụng các giá trị cảm biến
         sleep(0.08)
-    display.lcd_display_string(value, 2)
+    display.lcd_display_string(str(value), 2)
     sleep(0.081)
